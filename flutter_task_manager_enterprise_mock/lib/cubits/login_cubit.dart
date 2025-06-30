@@ -62,8 +62,14 @@ class LoginCubit extends Cubit<LoginState> {
       throw Exception("Password must be at least 6 characters");
     }
 
-    if (!RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$').hasMatch(password)) {
-      throw Exception("Password must contain uppercase, lowercase, and a number");
+    if (!RegExp(r'[A-Z]').hasMatch(password)) {
+      throw Exception("Password must contain at least one uppercase letter");
+    }
+    if (!RegExp(r'[a-z]').hasMatch(password)) {
+      throw Exception("Password must contain at least one lowercase letter");
+    }
+    if (!RegExp(r'\d').hasMatch(password)) {
+      throw Exception("Password must contain at least one number");
     }
 
     if (password != confirmPassword) {
